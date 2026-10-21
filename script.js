@@ -266,7 +266,7 @@ document.getElementById("btn-send-wa").addEventListener("click", () => {
 // Panggil Pelayan
 document.getElementById("btn-call-waiter").addEventListener("click", () => {
     getar();
-    const nomorWA = "6281234567890";
+    const nomorWA = "628176938430";
     const nomorMeja = prompt("Nomor Meja Anda?");
     if (nomorMeja) {
         const pesan = `Halo, mohon bantuan pelayan ke *Meja ${nomorMeja}*.`;
