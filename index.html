@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <!-- Meta viewport sangat penting agar web tampil responsif di layar HP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Digital KafeKu</title>
+    
+    <!-- Menghubungkan HTML dengan file CSS untuk desain tampilan -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==========================================
+         BAGIAN HEADER (Logo & Tombol Tema)
+         ========================================== -->
+    <header class="header-container">
+        <h1 class="logo">☕ KafeKu</h1>
+        <!-- Tombol untuk mengubah tema Gelap/Terang (Fitur Smart Dark Mode) -->
+        <button id="theme-toggle" class="btn-icon">🌙 Mode Gelap</button>
+    </header>
+
+    <!-- ==========================================
+         BAGIAN REKOMENDASI (Slider/Carousel)
+         ========================================== -->
+    <section class="recommendation-section">
+        <h2>⭐ Rekomendasi Hari Ini</h2>
+        <div id="carousel-container" class="carousel">
+            <!-- Kartu menu rekomendasi akan dimasukkan ke sini oleh JavaScript -->
+        </div>
+    </section>
+
+    <!-- ==========================================
+         BAGIAN FILTER & PENCARIAN
+         ========================================== -->
+    <section class="controls-section">
+        <!-- Kolom Pencarian Teks -->
+        <input type="text" id="search-input" placeholder="Cari kopi, camilan..." class="search-bar">
+
+        <!-- Tombol Filter Kategori Utama -->
+        <div class="category-filters">
+            <button class="btn-filter active" data-category="semua">Semua</button>
+            <button class="btn-filter" data-category="makanan">Makanan</button>
+            <button class="btn-filter" data-category="minuman">Minuman</button>
+            <button class="btn-filter" data-category="penutup">Penutup</button>
+        </div>
+
+        <!-- Tombol Filter Kreatif (Ide Fresh) -->
+        <div class="creative-filters">
+            <button id="btn-budget" class="btn-outline">💰 Sesuai Kantong</button>
+            <button id="btn-mood" class="btn-outline">🎭 Mood Hari Ini</button>
+            <button id="btn-diet" class="btn-outline">🥗 Filter Alergi</button>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         BAGIAN DAFTAR MENU UTAMA (Grid)
+         ========================================== -->
+    <main class="menu-container" id="menu-grid">
+        
+        <!-- CONTOH 1 KARTU MENU 
+             (Ini adalah cetak biru/template. Nantinya, JavaScript akan 
+             membuat elemen seperti ini secara otomatis berdasarkan data menu) -->
+        <article class="menu-card" data-category="minuman">
+            
+            <!-- Lencana Best Seller -->
+            <span class="badge best-seller">🔥 Best Seller</span>
+
+            <!-- Bagian Gambar & Waktu Tunggu -->
+            <div class="menu-media">
+                <img src="kopi-gula-aren.jpg" alt="Kopi Susu Gula Aren">
+                <span class="wait-time">⏳ 5-10 Menit</span>
+            </div>
+
+            <!-- Informasi Nama, Deskripsi, dan Harga -->
+            <div class="menu-info">
+                <h3 class="menu-title">Kopi Susu Gula Aren</h3>
+                <p class="menu-desc">Espresso 100% Arabica dipadu susu segar dan gula aren.</p>
+                <p class="menu-price">Rp 22.000</p>
+            </div>
+
+            <!-- Tombol Interaksi -->
+            <div class="menu-actions">
+                <button class="btn-customize">Atur Es/Gula</button>
+                <button class="btn-add-cart">Tambah 🛒</button>
+            </div>
+            
+        </article>
+        <!-- Akhir dari Contoh Kartu Menu -->
+
+    </main>
+
+    <!-- ==========================================
+         TOMBOL MENGAMBANG (Floating Action Buttons)
+         ========================================== -->
+    <div class="fab-container">
+        <!-- Fitur "Surprise Me!" (Random Menu) -->
+        <button id="btn-surprise" class="btn-fab">🎲 Bingung?</button>
+        <!-- Fitur Panggil Pelayan via WhatsApp -->
+        <button id="btn-call-waiter" class="btn-fab">🙋 Panggil Pelayan</button>
+    </div>
+
+    <!-- ==========================================
+         PANEL KERANJANG & CHECKOUT (Cart)
+         ========================================== -->
+    <aside class="cart-panel hidden" id="cart-panel">
+        
+        <div class="cart-header">
+            <h3>Keranjang (<span id="cart-count">0</span>)</h3>
+            <button id="btn-close-cart" class="btn-close">&times;</button>
+        </div>
+
+        <!-- Daftar item yang dipesan akan muncul di sini -->
+        <div class="cart-items" id="cart-items"></div>
+
+        <!-- Ringkasan Harga & Waktu -->
+        <div class="cart-summary">
+            <p>Estimasi Selesai: <span id="total-wait-time">-</span></p>
+            <h4>Total Tagihan: <span id="total-price">Rp 0</span></h4>
+        </div>
+
+        <!-- Fitur Split Bill / Hitung Patungan -->
+        <div class="split-bill-section">
+            <label for="split-count">Bagi tagihan (Orang):</label>
+            <input type="number" id="split-count" min="1" value="1">
+            <p>Bayar per orang: <strong id="split-result">Rp 0</strong></p>
+        </div>
+
+        <!-- Tombol Aksi Kasir -->
+        <div class="checkout-actions">
+            <button id="btn-qris-modal" class="btn-secondary">Bayar via QRIS</button>
+            <button id="btn-send-wa" class="btn-primary">Kirim Pesanan (WA) 🚀</button>
+        </div>
+
+    </aside>
+
+    <!-- ==========================================
+         MODAL (POP-UP) UNTUK PEMBAYARAN QRIS
+         ========================================== -->
+    <div id="modal-qris" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="btn-close" id="close-qris">&times;</button>
+            <h2>Scan QRIS KafeKu</h2>
+            <p>Scan kode di bawah menggunakan m-Banking atau e-Wallet.</p>
+            <!-- Ganti src dengan gambar barcode QRIS kafe yang asli -->
+            <img src="qris-dummy.png" alt="Barcode QRIS" class="qris-image">
+            <p class="modal-note">*Harap tunjukkan bukti transfer saat kasir atau pelayan mengonfirmasi pesanan.</p>
+        </div>
+    </div>
+
+    <!-- Menghubungkan HTML dengan file JavaScript untuk interaktivitas -->
+    <script src="script.js"></script>
+</body>
+</html>
