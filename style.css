@@ -1,0 +1,133 @@
+/* =========================================================
+   1. CSS VARIABLES (Tema Warna Terang & Gelap)
+   Memudahkan kita mengubah warna secara massal.
+   ========================================================= */
+:root {
+    /* Tema Terang (Default) */
+    --bg-color: #f9fafb;
+    --text-color: #1f2937;
+    --card-bg: #ffffff;
+    --primary-color: #d97706; /* Warna oranye kopi */
+    --secondary-color: #4b5563;
+    --border-color: #e5e7eb;
+    --badge-bg: #ef4444; /* Merah untuk best seller */
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Mengubah variabel saat mode gelap aktif */
+[data-theme="dark"] {
+    --bg-color: #111827;
+    --text-color: #f3f4f6;
+    --card-bg: #1f2937;
+    --border-color: #374151;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================================
+   2. RESET & BASE STYLE
+   Menghapus jarak bawaan browser agar seragam.
+   ========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Animasi transisi tema halus */
+    padding-bottom: 100px; /* Ruang untuk floating button/cart di bawah */
+}
+
+/* =========================================================
+   3. HEADER
+   ========================================================= */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* =========================================================
+   4. BAGIAN KONTROL (Pencarian & Filter)
+   ========================================================= */
+.controls-section {
+    padding: 16px 20px;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
+
+/* Container untuk tombol filter yang bisa di-scroll ke samping */
+.category-filters, .creative-filters {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+}
+.category-filters::-webkit-scrollbar, .creative-filters::-webkit-scrollbar {
+    display: none; /* Sembunyikan scrollbar di Chrome/Safari */
+}
+
+/* =========================================================
+   5. DESAIN TOMBOL (Buttons)
+   ========================================================= */
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: transform 0.1s ease, opacity 0.2s ease;
+}
+
+button:active {
+    transform: scale(0.95); /* Efek membal (Haptic Feedback) saat ditekan */
+}
+
+.btn-filter, .btn-outline {
+    padding: 8px 16px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    white-space: nowrap; /* Teks tidak turun ke baris baru */
+}
+
+.btn-filter.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.btn-add-cart, .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+}
+
+.btn-icon {
+    background: none;
+    color: var(--text-color);
+    font-size
